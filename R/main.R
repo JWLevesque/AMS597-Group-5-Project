@@ -10,6 +10,33 @@
 library(roxygen2)
 library(devtools)
 
+#' Helper method which determines if a biomarker is normally distributed by group at alpha level 0.05.
+#'
+#' This function will be called by the implementations of bullet 1 and 2 on page 7 of the project slides.
+#' Note that the shapiro.test() function limits sample size to 5000.
+#'
+#' @param dataFrame The data frame to test for normality by group.
+#' @param marker The biomarker number to be tested; e.g., for the nth biomarker, input integer n.
+#'                   Note that marker n corresponds to column n+1 in the data frame.
+#' @return True if normality cannot be rejected for all groups; false otherwise.
+isNormByGroup = function(dataFrame, marker){
+  tbr = TRUE
+  groupNames = levels(factor(dataFrame$group))
+  # For each group, test for normality
+  for(i in 1:length(groupNames)){
+    group_i_indices = which(dataFrame$group == groupNames[i])
+    group_i = dataFrame[group_i_indices, marker+1]
+    # Test the values for biomarker n in group i for normality
+    if(shapiro.test(group_i)$p.value < 0.05){
+      # If p-value is less than alpha = 0.05, reject normality
+      tbr = FALSE
+      # No need to continue the loop, since one group isnt normal--break
+      break
+    }
+  }
+  return(tbr)
+}
+
 #' Helper method for the main method.
 #'
 #' Tests to see if the input to the main function is valid.
