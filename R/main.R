@@ -63,7 +63,18 @@ getFramePvals = function(dataFrame){
         tbr[i] = (t.test(groupOne, groupTwo, var.equal = isHomoskedastic)$p.value) # add the p-value to the vector tbr
       } else {
         ### Do one-way ANOVA
-        ######### TO-DO: one-way ANOVA between groups on biomarker i
+        # Check equal variance assumption of ANOVA.  Since the data is normal by if(isNorm), Bartlett's test can be used instead of Levene:
+        isHomoskedastic = ((bartlett.test(x = dataFrame[,i+1], g = dataFrame$group)$p.value) >= 0.05) # Cannot reject equal variance if p-value >= alpha=0.05
+        # If equal variance assumption is plausible at alpha level 0.05, do ANOVA
+        if(isHomoskedastic){
+          aovRes = aov(dataFrame[,i+1]~dataFrame$group)
+          aovSummary = summary.aov(aovRes)
+          tbr[i] = aovSummary[[1]][["Pr(>F)"]][[1]]
+        }
+        # If we reject equal variance between groups, use Welch ANOVA
+        else {
+          tbr[i] = (oneway.test(dataFrame[,i+1]~dataFrame$group)$p.value)
+        }
       }
     }
     # If not normal, then do either Kruskal Wallis test or the Wilcoxon rank sum test according to quantity of groups
@@ -75,7 +86,7 @@ getFramePvals = function(dataFrame){
         tbr[i] = (wilcox.test(groupOne, groupTwo)$p.value) # add the p-value to the vector tbr
       } else {
         ### Do Kruskal Wallis test
-        ######### TO-DO: Kruskal Wallis test between groups 1 and 2 on biomarker i
+        tbr[i] = (kruskal.test(x = dataFrame[,i+1], g = dataFrame$group)$p.value)
       }
     }
   }
