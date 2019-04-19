@@ -54,8 +54,8 @@ pooledPValues = function(method = "Fisher", ...){
 #' Pools the p-values using the Stouffer method.
 #'
 #' @param unpooledPvalsList A list (by data frame) of vectors (by biomarker in data frame) of p-values for group difference in each biomarker.
-#'                          E.g., p-value for group difference in biomarker j from data frame i is given by unpooledPvalsList[[i]][j].
-#' @param frameList A list of the original 2-5 data frames.  Note that data frame i is given by frameList[[i]].
+#'                          E.g., p-value for group difference in biomarker j from data frame i is given by \code{unpooledPvalsList[[i]][j]}.
+#' @param frameList A list of the original 2-5 data frames.  Note that data frame i is given by \code{frameList[[i]]}.
 #' @return A vector containing pooled p-values for each biomarker.  For p biomarkers, the vector will be of length p.
 poolStouffer = function(unpooledPvalsList, frameList){
   ###
@@ -66,8 +66,8 @@ poolStouffer = function(unpooledPvalsList, frameList){
 #' Pools the p-values using the Minimum p-value method.
 #'
 #' @param unpooledPvalsList A list (by data frame) of vectors (by biomarker in data frame) of p-values for group difference in each biomarker.
-#'                          E.g., p-value for group difference in biomarker j from data frame i is given by unpooledPvalsList[[i]][j].
-#' @param frameList A list of the original 2-5 data frames.  Note that data frame i is given by frameList[[i]].
+#'                          E.g., p-value for group difference in biomarker j from data frame i is given by \code{unpooledPvalsList[[i]][j]}.
+#' @param frameList A list of the original 2-5 data frames.  Note that data frame i is given by \code{frameList[[i]]}.
 #' @return A vector containing pooled p-values for each biomarker.  For p biomarkers, the vector will be of length p.
 poolMinP = function(unpooledPvalsList, frameList){
   ###
@@ -78,8 +78,8 @@ poolMinP = function(unpooledPvalsList, frameList){
 #' Pools the p-values using the Maximum p-value method.
 #'
 #' @param unpooledPvalsList A list (by data frame) of vectors (by biomarker in data frame) of p-values for group difference in each biomarker.
-#'                          E.g., p-value for group difference in biomarker j from data frame i is given by unpooledPvalsList[[i]][j].
-#' @param frameList A list of the original 2-5 data frames.  Note that data frame i is given by frameList[[i]].
+#'                          E.g., p-value for group difference in biomarker j from data frame i is given by \code{unpooledPvalsList[[i]][j]}.
+#' @param frameList A list of the original 2-5 data frames.  Note that data frame i is given by \code{frameList[[i]]}.
 #' @return A vector containing pooled p-values for each biomarker.  For p biomarkers, the vector will be of length p.
 poolMaxP = function(unpooledPvalsList, frameList){
   ###
@@ -90,8 +90,8 @@ poolMaxP = function(unpooledPvalsList, frameList){
 #' Pools the p-values using the Fisher method.
 #'
 #' @param unpooledPvalsList A list (by data frame) of vectors (by biomarker in data frame) of p-values for group difference in each biomarker.
-#'                          E.g., p-value for group difference in biomarker j from data frame i is given by unpooledPvalsList[[i]][j].
-#' @param frameList A list of the original 2-5 data frames.  Note that data frame i is given by frameList[[i]].
+#'                          E.g., p-value for group difference in biomarker j from data frame i is given by \code{unpooledPvalsList[[i]][j]}.
+#' @param frameList A list of the original 2-5 data frames.  Note that data frame i is given by \code{frameList[[i]]}.
 #' @return A vector containing pooled p-values for each biomarker.  For p biomarkers, the vector will be of length p.
 poolFisher = function(unpooledPvalsList, frameList){
   ###
@@ -162,7 +162,7 @@ getFramePvals = function(dataFrame){
 #' Helper method which determines if a biomarker is normally distributed by group at alpha level 0.05.
 #'
 #' This function will be called by the implementations of bullet 1 and 2 on page 7 of the project slides.
-#' Note that the shapiro.test() function limits sample size to 5000.
+#' Note that the \code{shapiro.test()} function limits sample size to \code{5000}.
 #'
 #' @param dataFrame The data frame to test for normality by group.
 #' @param marker The biomarker number to be tested; e.g., for the nth biomarker, input integer n.

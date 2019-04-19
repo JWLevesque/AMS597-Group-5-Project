@@ -17,5 +17,5 @@ True if normality cannot be rejected for all groups; false otherwise.
 }
 \description{
 This function will be called by the implementations of bullet 1 and 2 on page 7 of the project slides.
-Note that the shapiro.test() function limits sample size to 5000.
+Note that the \code{shapiro.test()} function limits sample size to \code{5000}.
 }

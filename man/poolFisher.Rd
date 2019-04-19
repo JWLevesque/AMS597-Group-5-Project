@@ -8,9 +8,9 @@ poolFisher(unpooledPvalsList, frameList)
 }
 \arguments{
 \item{unpooledPvalsList}{A list (by data frame) of vectors (by biomarker in data frame) of p-values for group difference in each biomarker.
-E.g., p-value for group difference in biomarker j from data frame i is given by unpooledPvalsList[[i]][j].}
+E.g., p-value for group difference in biomarker j from data frame i is given by \code{unpooledPvalsList[[i]][j]}.}
 
-\item{frameList}{A list of the original 2-5 data frames.  Note that data frame i is given by frameList[[i]].}
+\item{frameList}{A list of the original 2-5 data frames.  Note that data frame i is given by \code{frameList[[i]]}.}
 }
 \value{
 A vector containing pooled p-values for each biomarker.  For p biomarkers, the vector will be of length p.

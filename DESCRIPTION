@@ -2,10 +2,10 @@ Package: Group5Project
 Type: Package
 Title: AMS 597 Group 5 Project
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Author: Yujia Hou, Joseph Levesque, & Guanchao Tong
+Authors@R: c(person("Joseph", "Levesque", email = "joseph.levesque@stonybrook.edu", role = c("aut","cre")), person("Yujia", "Hou", email = "yujia.hou@stonybrook.edu", role = c("aut")), person("Guanchao", "Tong", email = "guanchao.tong@stonybrook.edu", role = c("aut")))
+Maintainer: <yujia.hou@stonybrook.edu>, <joseph.levesque@stonybrook.edu>, <guanchao.tong@stonybrook.edu>
+Description: Implements various methods for pooling statistical evidence from multiple datasets.
 License: CC0
 Encoding: UTF-8
 LazyData: true
