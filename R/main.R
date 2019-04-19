@@ -28,9 +28,75 @@ pooledPValues = function(method = "Fisher", ...){
   #     e.g., p-value for group difference in biomarker j from data frame i is given by unpooledPvalsList[[i]][j].
   unpooledPvalsList = list()
   for(i in 1:length(frames)){
-    unpooledPvalsList[i] = getFramePvals(frames[[i]])
+    unpooledPvalsList[[i]] = getFramePvals(frames[[i]])
   }
   ## TO-DO: Have if-else here based on "method" argument for pooling the p-values in unpooledPvalsList
+  tbr = rep(NA, length(unpooledPvalsList[[1]]))
+  if(method == "Stouffer"){
+    # use Stouffer
+    tbr = poolStouffer(unpooledPvalsList, frames)
+  } else if(method == "minP"){
+    # use minP
+    tbr = poolMinP(unpooledPvalsList, frames)
+  } else if(method == "maxP"){
+    # use maxP
+    tbr = poolMaxP(unpooledPvalsList, frames)
+  } else if(method == "Fisher"){
+    # use Fisher
+    tbr = poolFisher(unpooledPvalsList, frames)
+  } else {
+    # Invalid input for method argument; throw exception
+    stop("Invalid input for argument 'method'. Please see documentation.")
+  }
+  return(tbr)
+}
+
+#' Pools the p-values using the Stouffer method.
+#'
+#' @param unpooledPvalsList A list (by data frame) of vectors (by biomarker in data frame) of p-values for group difference in each biomarker.
+#'                          E.g., p-value for group difference in biomarker j from data frame i is given by unpooledPvalsList[[i]][j].
+#' @param frameList A list of the original 2-5 data frames.  Note that data frame i is given by frameList[[i]].
+#' @return A vector containing pooled p-values for each biomarker.  For p biomarkers, the vector will be of length p.
+poolStouffer = function(unpooledPvalsList, frameList){
+  ###
+  ### TO-DO: Method Stub
+  ###
+}
+
+#' Pools the p-values using the Minimum p-value method.
+#'
+#' @param unpooledPvalsList A list (by data frame) of vectors (by biomarker in data frame) of p-values for group difference in each biomarker.
+#'                          E.g., p-value for group difference in biomarker j from data frame i is given by unpooledPvalsList[[i]][j].
+#' @param frameList A list of the original 2-5 data frames.  Note that data frame i is given by frameList[[i]].
+#' @return A vector containing pooled p-values for each biomarker.  For p biomarkers, the vector will be of length p.
+poolMinP = function(unpooledPvalsList, frameList){
+  ###
+  ### TO-DO: Method Stub
+  ###
+}
+
+#' Pools the p-values using the Maximum p-value method.
+#'
+#' @param unpooledPvalsList A list (by data frame) of vectors (by biomarker in data frame) of p-values for group difference in each biomarker.
+#'                          E.g., p-value for group difference in biomarker j from data frame i is given by unpooledPvalsList[[i]][j].
+#' @param frameList A list of the original 2-5 data frames.  Note that data frame i is given by frameList[[i]].
+#' @return A vector containing pooled p-values for each biomarker.  For p biomarkers, the vector will be of length p.
+poolMaxP = function(unpooledPvalsList, frameList){
+  ###
+  ### TO-DO: Method Stub
+  ###
+}
+
+#' Pools the p-values using the Fisher method.
+#'
+#' @param unpooledPvalsList A list (by data frame) of vectors (by biomarker in data frame) of p-values for group difference in each biomarker.
+#'                          E.g., p-value for group difference in biomarker j from data frame i is given by unpooledPvalsList[[i]][j].
+#' @param frameList A list of the original 2-5 data frames.  Note that data frame i is given by frameList[[i]].
+#' @return A vector containing pooled p-values for each biomarker.  For p biomarkers, the vector will be of length p.
+poolFisher = function(unpooledPvalsList, frameList){
+  ###
+  ### TO-DO: Method Stub
+  ###
 }
 
 #' Helper method which populates a vector with p-values for group difference in each biomarker from a single frame.
