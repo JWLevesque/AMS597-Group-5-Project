@@ -1,14 +1,5 @@
-# You can learn more about package authoring with RStudio at:
-#
-#   http://r-pkgs.had.co.nz/
-#
-# Some useful keyboard shortcuts for package authoring:
-#
-#   Build and Reload Package:  'Ctrl + Shift + B'
-#   Check Package:             'Ctrl + Shift + E'
-#   Test Package:              'Ctrl + Shift + T'
-library(roxygen2)
-library(devtools)
+#library(roxygen2)
+#library(devtools)
 
 #' Pools the p-values between data frames using the specified method.
 #'
@@ -57,6 +48,7 @@ pooledPValues = function(method = "Fisher", ...){
 #'                          E.g., p-value for group difference in biomarker j from data frame i is given by \code{unpooledPvalsList[[i]][j]}.
 #' @param frameList A list of the original 2-5 data frames.  Note that data frame i is given by \code{frameList[[i]]}.
 #' @return A vector containing pooled p-values for each biomarker.  For p biomarkers, the vector will be of length p.
+#' @importFrom stats qnorm pnorm
 poolStouffer = function(unpooledPvalsList, frameList){
   k<-length(frameList)
   Tstouffer<-rep(NA,length(unpooledPvalsList[[1]]))
@@ -115,6 +107,7 @@ poolMaxP = function(unpooledPvalsList, frameList){
 #'                          E.g., p-value for group difference in biomarker j from data frame i is given by \code{unpooledPvalsList[[i]][j]}.
 #' @param frameList A list of the original 2-5 data frames.  Note that data frame i is given by \code{frameList[[i]]}.
 #' @return A vector containing pooled p-values for each biomarker.  For p biomarkers, the vector will be of length p.
+#' @importFrom stats pchisq
 poolFisher = function(unpooledPvalsList, frameList){
   k<-length(frameList)
   chisquare<-rep(NA,length(unpooledPvalsList[[1]]))
@@ -135,6 +128,7 @@ poolFisher = function(unpooledPvalsList, frameList){
 #'
 #' @param dataFrame The data frame to generate p-values from.
 #' @return A vector containing the p-values for group difference for each biomarker in the specified data frame.  Note that if there are p biomarkers, this vector will be of length p.
+#' @importFrom stats var.test t.test bartlett.test aov summary.aov oneway.test wilcox.test kruskal.test
 getFramePvals = function(dataFrame){
   p = (length(dataFrame[1,]) - 1) # p = num_biomarkers
   tbr = rep(NA, p) # vector to populate with p-values
@@ -198,6 +192,7 @@ getFramePvals = function(dataFrame){
 #' @param marker The biomarker number to be tested; e.g., for the nth biomarker, input integer n.
 #'                   Note that marker n corresponds to column n+1 in the data frame.
 #' @return True if normality cannot be rejected for all groups; false otherwise.
+#' @importFrom stats shapiro.test
 isNormByGroup = function(dataFrame, marker){
   tbr = TRUE
   groupNames = levels(factor(dataFrame$group))
