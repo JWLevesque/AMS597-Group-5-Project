@@ -22,7 +22,7 @@ pooledPValues = function(method = "Fisher", ...){
   # Check the data frames for validity
   if(!isInputValid(frames)){
     # If invalid, thow an exception and stop execution
-    stop("Input is invalid.  See documentation for valid input.")
+    stop("Input is invalid: invalid data frames.  Please see documentation.")
   }
   # Generate a list (by data frame) of vectors (by biomarker in data frame) of p-values for group difference in each biomarker.
   #     e.g., p-value for group difference in biomarker j from data frame i is given by unpooledPvalsList[[i]][j].
@@ -30,7 +30,7 @@ pooledPValues = function(method = "Fisher", ...){
   for(i in 1:length(frames)){
     unpooledPvalsList[[i]] = getFramePvals(frames[[i]])
   }
-  ## TO-DO: Have if-else here based on "method" argument for pooling the p-values in unpooledPvalsList
+  # Pool p-values according to the
   tbr = rep(NA, length(unpooledPvalsList[[1]]))
   if(method == "Stouffer"){
     # use Stouffer
@@ -58,9 +58,17 @@ pooledPValues = function(method = "Fisher", ...){
 #' @param frameList A list of the original 2-5 data frames.  Note that data frame i is given by \code{frameList[[i]]}.
 #' @return A vector containing pooled p-values for each biomarker.  For p biomarkers, the vector will be of length p.
 poolStouffer = function(unpooledPvalsList, frameList){
-  ###
-  ### TO-DO: Method Stub
-  ###
+  k<-length(frameList)
+  Tstouffer<-rep(NA,length(unpooledPvalsList[[1]]))
+  pooledPValues<-rep(NA,length(unpooledPvalsList[[1]]))
+  for (i in 1: length(unpooledPvalsList[[1]])){
+    Tstouffer[i] <-0
+    for(j in 1:length(frameList)){
+      Tstouffer[i]<-Tstouffer[i]+qnorm(unpooledPvalsList[[j]][i])/sqrt(k)
+    }
+    pooledPValues[i]<-pnorm(Tstouffer[i])
+  }
+  return(pooledPValues)
 }
 
 #' Pools the p-values using the Minimum p-value method.
@@ -70,9 +78,16 @@ poolStouffer = function(unpooledPvalsList, frameList){
 #' @param frameList A list of the original 2-5 data frames.  Note that data frame i is given by \code{frameList[[i]]}.
 #' @return A vector containing pooled p-values for each biomarker.  For p biomarkers, the vector will be of length p.
 poolMinP = function(unpooledPvalsList, frameList){
-  ###
-  ### TO-DO: Method Stub
-  ###
+  k<-length(frameList)
+  pooledPValues<-rep(NA,length(unpooledPvalsList[[1]]))
+  for (i in 1: length(unpooledPvalsList[[1]])){
+    mincandidate<-rep(NA,length(frameList))
+    for(j in 1:length(frameList)){
+      mincandidate[j]<-unpooledPvalsList[[j]][i]
+    }
+    pooledPValues[i]<-min(mincandidate)
+  }
+  return(pooledPValues)
 }
 
 #' Pools the p-values using the Maximum p-value method.
@@ -82,9 +97,16 @@ poolMinP = function(unpooledPvalsList, frameList){
 #' @param frameList A list of the original 2-5 data frames.  Note that data frame i is given by \code{frameList[[i]]}.
 #' @return A vector containing pooled p-values for each biomarker.  For p biomarkers, the vector will be of length p.
 poolMaxP = function(unpooledPvalsList, frameList){
-  ###
-  ### TO-DO: Method Stub
-  ###
+  k<-length(frameList)
+  pooledPValues<-rep(NA,length(unpooledPvalsList[[1]]))
+  for (i in 1: length(unpooledPvalsList[[1]])){
+    maxcandidate<-rep(NA,length(frameList))
+    for(j in 1:length(frameList)){
+      maxcandidate[j]<-unpooledPvalsList[[j]][i]
+    }
+    pooledPValues[i]<-max(maxcandidate)
+  }
+  return(pooledPValues)
 }
 
 #' Pools the p-values using the Fisher method.
@@ -94,9 +116,17 @@ poolMaxP = function(unpooledPvalsList, frameList){
 #' @param frameList A list of the original 2-5 data frames.  Note that data frame i is given by \code{frameList[[i]]}.
 #' @return A vector containing pooled p-values for each biomarker.  For p biomarkers, the vector will be of length p.
 poolFisher = function(unpooledPvalsList, frameList){
-  ###
-  ### TO-DO: Method Stub
-  ###
+  k<-length(frameList)
+  chisquare<-rep(NA,length(unpooledPvalsList[[1]]))
+  pooledPValues<-rep(NA,length(unpooledPvalsList[[1]]))
+  for (i in 1: length(unpooledPvalsList[[1]])){
+    chisquare[i] <-0
+    for(j in 1:length(frameList)){
+      chisquare[i]<-chisquare[i]-2*log(unpooledPvalsList[[j]][i])
+    }
+    pooledPValues[i]<-pchisq(chisquare[i],lower.tail = FALSE,df=2*k)
+  }
+  return(pooledPValues)
 }
 
 #' Helper method which populates a vector with p-values for group difference in each biomarker from a single frame.
