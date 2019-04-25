@@ -157,13 +157,13 @@ getFramePvals = function(dataFrame){
         isHomoskedastic = ((bartlett.test(x = dataFrame[,i+1], g = dataFrame$group)$p.value) >= 0.05) # Cannot reject equal variance if p-value >= alpha=0.05
         # If equal variance assumption is plausible at alpha level 0.05, do ANOVA
         if(isHomoskedastic){
-          aovRes = aov(dataFrame[,i+1]~dataFrame$group)
+          aovRes = aov(dataFrame[,i+1]~factor(dataFrame$group))
           aovSummary = summary.aov(aovRes)
           tbr[i] = aovSummary[[1]][["Pr(>F)"]][[1]]
         }
         # If we reject equal variance between groups, use Welch ANOVA
         else {
-          tbr[i] = (oneway.test(dataFrame[,i+1]~dataFrame$group)$p.value)
+          tbr[i] = (oneway.test(dataFrame[,i+1]~factor(dataFrame$group))$p.value)
         }
       }
     }
