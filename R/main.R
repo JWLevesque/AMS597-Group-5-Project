@@ -69,6 +69,7 @@ poolStouffer = function(unpooledPvalsList, frameList){
 #'                          E.g., p-value for group difference in biomarker j from data frame i is given by \code{unpooledPvalsList[[i]][j]}.
 #' @param frameList A list of the original 2-5 data frames.  Note that data frame i is given by \code{frameList[[i]]}.
 #' @return A vector containing pooled p-values for each biomarker.  For p biomarkers, the vector will be of length p.
+#' @importFrom stats pbeta
 poolMinP = function(unpooledPvalsList, frameList){
   k<-length(frameList)
   pooledPValues<-rep(NA,length(unpooledPvalsList[[1]]))
@@ -77,7 +78,7 @@ poolMinP = function(unpooledPvalsList, frameList){
     for(j in 1:length(frameList)){
       mincandidate[j]<-unpooledPvalsList[[j]][i]
     }
-    pooledPValues[i]<-min(mincandidate)
+    pooledPValues[i]<-pbeta(min(mincandidate),1,k)
   }
   return(pooledPValues)
 }
@@ -88,6 +89,7 @@ poolMinP = function(unpooledPvalsList, frameList){
 #'                          E.g., p-value for group difference in biomarker j from data frame i is given by \code{unpooledPvalsList[[i]][j]}.
 #' @param frameList A list of the original 2-5 data frames.  Note that data frame i is given by \code{frameList[[i]]}.
 #' @return A vector containing pooled p-values for each biomarker.  For p biomarkers, the vector will be of length p.
+#' @importFrom stats pbeta
 poolMaxP = function(unpooledPvalsList, frameList){
   k<-length(frameList)
   pooledPValues<-rep(NA,length(unpooledPvalsList[[1]]))
@@ -96,7 +98,7 @@ poolMaxP = function(unpooledPvalsList, frameList){
     for(j in 1:length(frameList)){
       maxcandidate[j]<-unpooledPvalsList[[j]][i]
     }
-    pooledPValues[i]<-max(maxcandidate)
+    pooledPValues[i]<-pbeta(max(maxcandidate),k,1)
   }
   return(pooledPValues)
 }
@@ -231,6 +233,11 @@ isInputValid = function(input){
   # Iterate through the 2-5 data frames
   numCols = length(input[[1]][1,])
   for(i in 1:length(input)){
+    # Check that the list element is a data frame
+    if(class(input[[i]] != "data.frame")){
+      tbr = FALSE
+      break
+    }
     # Check that all data frames have the same number of columns
     if(length(input[[i]][1,]) != numCols){
       tbr = FALSE #return(FALSE)
