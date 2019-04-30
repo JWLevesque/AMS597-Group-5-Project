@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+<title>Group5Project</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#header {
+text-align: center;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Group5Project</h1>
+
+
+
+<p>This vignette summarises the main functions in our package.</p>
+<div id="pooledpvalues" class="section level2">
+<h2>pooledPValues</h2>
+<p>This is the main function of the package: it is the only exported function, and as such the only function that the user should interface with. It pools the p-values between data frames using the specified method.</p>
+<p>Usage: pooledPValues(method = “Fisher”, …)</p>
+<p>The possible pooling method arguments are:</p>
+<ul>
+<li><p>“Fisher” for Fisher</p></li>
+<li><p>“Stouffer” for Stouffer</p></li>
+<li><p>“minP” for Minimum P-value</p></li>
+<li><p>“maxP” for Maximum P-value</p></li>
+</ul>
+<p>The data frames to pool the p-values from are to be passed as arguments after the method specification argument. There must be between 2 and 5 data frames, all with the same number of columns, and at least 2 groups per data frame.</p>
+<p>The output is a vector of the pooled p-values for each biomarker. For p biomarkers, the vector will be of length p.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">p&lt;-<span class="dv">100</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">data1 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">group=</span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dv">200</span>,<span class="dt">replace=</span><span class="ot">TRUE</span>),<span class="kw">matrix</span>(<span class="kw">rnorm</span>(p<span class="op">*</span><span class="dv">200</span>),<span class="dt">ncol=</span>p))</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">data2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">group=</span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>,<span class="dv">150</span>,<span class="dt">replace=</span><span class="ot">TRUE</span>),<span class="kw">matrix</span>(<span class="kw">rnorm</span>(p<span class="op">*</span><span class="dv">150</span>),<span class="dt">ncol=</span>p))</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="kw">pooledPValues</span>(<span class="dt">method =</span> <span class="st">&quot;Fisher&quot;</span>,data1,data2)</a></code></pre></div>
+<pre><code>##   [1] 0.302503573 0.589393416 0.947506841 0.617066869 0.422340902
+##   [6] 0.630409589 0.750524323 0.295256466 0.433864973 0.329312210
+##  [11] 0.261973332 0.019048819 0.731839495 0.403084441 0.732310007
+##  [16] 0.790935102 0.309514681 0.539876390 0.693056260 0.229889128
+##  [21] 0.067407684 0.422215391 0.040806602 0.541163545 0.907159151
+##  [26] 0.044372844 0.096748191 0.357469880 0.277141898 0.808933154
+##  [31] 0.381331450 0.159759889 0.626929082 0.109424460 0.358092364
+##  [36] 0.931671612 0.810243975 0.317087373 0.404142120 0.720985092
+##  [41] 0.735255981 0.936357799 0.904594253 0.912145668 0.631071908
+##  [46] 0.777234694 0.406673117 0.267218392 0.483378503 0.394131034
+##  [51] 0.114955509 0.537176437 0.325187107 0.701001086 0.781698157
+##  [56] 0.103944797 0.140927551 0.759290773 0.580170534 0.981940157
+##  [61] 0.424274052 0.244025107 0.465422808 0.324126216 0.664195557
+##  [66] 0.466618114 0.856692587 0.603083022 0.968794549 0.188815268
+##  [71] 0.915218915 0.406462344 0.103863882 0.001671288 0.764873863
+##  [76] 0.403808154 0.067623264 0.827317846 0.429483906 0.152321455
+##  [81] 0.568898583 0.779979315 0.587819419 0.906844534 0.806989041
+##  [86] 0.343879270 0.621257550 0.604694284 0.047136817 0.020220608
+##  [91] 0.694085344 0.869938372 0.906621473 0.939136722 0.611942246
+##  [96] 0.449445483 0.034215300 0.157910610 0.019084243 0.269415844</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">pooledPValues</span>(<span class="dt">method =</span> <span class="st">&quot;Stouffer&quot;</span>,data1,data2)</a></code></pre></div>
+<pre><code>##   [1] 0.426605573 0.560452770 0.967581480 0.559887395 0.385030343
+##   [6] 0.542232777 0.861907817 0.230833266 0.390259990 0.332299489
+##  [11] 0.213791408 0.019480993 0.647939672 0.517417722 0.736192850
+##  [16] 0.715673052 0.231599487 0.617538213 0.605065994 0.327293142
+##  [21] 0.072151134 0.334327113 0.101602309 0.486366372 0.862776019
+##  [26] 0.071013633 0.063770147 0.292987796 0.215650020 0.805847181
+##  [31] 0.297077166 0.186192192 0.541976403 0.151334112 0.277103699
+##  [36] 0.891592373 0.936958847 0.242301457 0.331414047 0.633035312
+##  [41] 0.934254158 0.943102968 0.967484605 0.878381869 0.702733154
+##  [46] 0.733985117 0.587860831 0.274147437 0.681396989 0.324067730
+##  [51] 0.077546296 0.636447505 0.383436764 0.622145046 0.897860447
+##  [56] 0.087388228 0.111044048 0.690616263 0.483469529 0.969105548
+##  [61] 0.516129821 0.190511261 0.371631238 0.286998429 0.586006774
+##  [66] 0.387327116 0.853594287 0.630005631 0.957467808 0.170583132
+##  [71] 0.875842669 0.318831469 0.079218021 0.001686822 0.691316575
+##  [76] 0.342240950 0.062025677 0.799845929 0.683966262 0.216702984
+##  [81] 0.472382930 0.711860700 0.567882398 0.948507995 0.809067136
+##  [86] 0.298243988 0.533793348 0.664297021 0.230631263 0.028714873
+##  [91] 0.623516696 0.891101410 0.859130734 0.921922270 0.634164553
+##  [96] 0.424377388 0.022830494 0.226730958 0.012006216 0.661215680</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">pooledPValues</span>(<span class="dt">method =</span> <span class="st">&quot;minP&quot;</span>,data1,data2)</a></code></pre></div>
+<pre><code>##   [1] 0.199291209 0.549353964 0.914620505 0.615160040 0.403871503
+##   [6] 0.707125666 0.636635841 0.372986738 0.423381611 0.277487316
+##  [11] 0.297258212 0.019897660 0.805141428 0.287618306 0.667055720
+##  [16] 0.848722567 0.503612661 0.427632874 0.776341467 0.147659345
+##  [21] 0.056980716 0.555374985 0.019228327 0.538395968 0.925842976
+##  [26] 0.027119526 0.225277198 0.407178352 0.352754064 0.757878441
+##  [31] 0.519271460 0.117806644 0.690690208 0.071123138 0.490087387
+##  [36] 0.960533941 0.704504274 0.440508471 0.465538979 0.818523088
+##  [41] 0.602987232 0.906532916 0.841545744 0.913199417 0.521352510
+##  [46] 0.763100874 0.275260320 0.220699015 0.341167911 0.449730061
+##  [51] 0.236825996 0.416753225 0.239976292 0.748411538 0.671867883
+##  [56] 0.116438111 0.174052232 0.787417027 0.728763628 0.984737720
+##  [61] 0.313853615 0.305470691 0.638552794 0.320184584 0.707031455
+##  [66] 0.532784104 0.813788461 0.516198846 0.963354628 0.182571576
+##  [71] 0.926977642 0.553118071 0.140070463 0.002792551 0.807171634
+##  [76] 0.432932549 0.069190763 0.801354633 0.284748663 0.096715778
+##  [81] 0.712861343 0.810686089 0.538229341 0.851111577 0.751720746
+##  [86] 0.351279863 0.694903240 0.499911825 0.017781001 0.014702047
+##  [91] 0.719336828 0.813866171 0.934188633 0.928767555 0.528148001
+##  [96] 0.412519201 0.072506581 0.099704938 0.052572456 0.147590003</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">pooledPValues</span>(<span class="dt">method =</span> <span class="st">&quot;maxP&quot;</span>,data1,data2)</a></code></pre></div>
+<pre><code>##   [1] 0.70415723 0.55492888 0.96138147 0.48762002 0.39715580 0.36002247
+##   [7] 0.92951771 0.16789695 0.38661426 0.44084596 0.19937885 0.07643271
+##  [13] 0.42461800 0.73675535 0.74235961 0.48984348 0.09521131 0.75384683
+##  [19] 0.38603626 0.61859816 0.18787747 0.18564287 0.49745295 0.43814481
+##  [25] 0.68281357 0.30467525 0.02681271 0.23755031 0.15946525 0.78314501
+##  [31] 0.16160445 0.37570928 0.37725406 0.40016270 0.15456872 0.66584333
+##  [37] 0.97709848 0.14017113 0.24977407 0.37905107 0.98634833 0.91784108
+##  [43] 0.98136091 0.75095640 0.80111338 0.64395500 0.83259946 0.40079116
+##  [49] 0.88277001 0.25140957 0.03722493 0.78713548 0.58200692 0.45086645
+##  [55] 0.95274003 0.12797810 0.12045746 0.52959206 0.24743534 0.86694156
+##  [61] 0.70981942 0.15452856 0.17481329 0.30773882 0.43484885 0.27982561
+##  [67] 0.82043995 0.70007304 0.88535986 0.23400685 0.71615212 0.16722418
+##  [73] 0.08711549 0.01532439 0.50407140 0.29545941 0.12760198 0.72899049
+##  [79] 0.91202955 0.49808069 0.24682411 0.53969448 0.57850327 0.95666229
+##  [85] 0.79404545 0.29675682 0.35916856 0.76371854 0.82386487 0.16142755
+##  [91] 0.48776227 0.88700752 0.65184076 0.84036150 0.69637434 0.45748004
+##  [97] 0.02232714 0.51388098 0.01081334 0.95661378</code></pre>
+</div>
+<div id="getframepvals" class="section level2">
+<h2>getFramePvals</h2>
+<p>This non-exported function tests for normality within groups as well as homoskedasticity between groups, then applies the appropriate test for group difference. The return value is a vector of the resulting p-values.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">p&lt;-<span class="dv">100</span></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3">data1 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">group=</span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dv">200</span>,<span class="dt">replace=</span><span class="ot">TRUE</span>),<span class="kw">matrix</span>(<span class="kw">rnorm</span>(p<span class="op">*</span><span class="dv">200</span>),<span class="dt">ncol=</span>p))</a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="kw">getFramePvals</span>(data1)</a></code></pre></div>
+<pre><code>##   [1] 0.839140771 0.328698253 0.980500620 0.379645295 0.630202983
+##   [6] 0.600018729 0.397203053 0.208158310 0.621783127 0.149992539
+##  [11] 0.446518583 0.276464655 0.651627197 0.155972930 0.861602932
+##  [16] 0.699888188 0.295452387 0.868243533 0.527074495 0.076777029
+##  [21] 0.433448344 0.430862937 0.705303445 0.661925079 0.727682127
+##  [26] 0.551973958 0.119816609 0.487391336 0.195484036 0.507941509
+##  [31] 0.402000563 0.060748513 0.443843734 0.632584143 0.285918343
+##  [36] 0.815992235 0.456404814 0.374394353 0.268931589 0.573998929
+##  [41] 0.993150709 0.958040227 0.601936870 0.866577408 0.308156455
+##  [46] 0.802468066 0.912468884 0.117219741 0.188315277 0.258198181
+##  [51] 0.192937621 0.887206561 0.762893781 0.498414054 0.427171826
+##  [56] 0.357740276 0.091183315 0.727730758 0.497428728 0.876459398
+##  [61] 0.842507816 0.393101207 0.418106798 0.175490803 0.458734312
+##  [66] 0.316468072 0.568477650 0.836703673 0.940935633 0.483742547
+##  [71] 0.729773506 0.331507720 0.072676142 0.123791734 0.709979858
+##  [76] 0.543561777 0.035215445 0.554303504 0.154274668 0.049587341
+##  [81] 0.464146795 0.564897816 0.320462908 0.978091146 0.891092277
+##  [86] 0.194568354 0.447644354 0.873909917 0.008930376 0.007378243
+##  [91] 0.470223469 0.941810767 0.807366559 0.916712334 0.313085159
+##  [96] 0.233527040 0.149422703 0.716854926 0.103987224 0.978066349</code></pre>
+</div>
+<div id="isinputvalid" class="section level2">
+<h2>isInputValid</h2>
+<p>This non-exported function tests to see if the input to the main function is valid. Valid input is defined as 2-5 data frames, each with:</p>
+<ul>
+<li><p>The same number of columns.</p></li>
+<li><p>At least 2 unique values in the first column.</p></li>
+</ul>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">p&lt;-<span class="dv">100</span></a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">data1 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">group=</span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dv">200</span>,<span class="dt">replace=</span><span class="ot">TRUE</span>),<span class="kw">matrix</span>(<span class="kw">rnorm</span>(p<span class="op">*</span><span class="dv">200</span>),<span class="dt">ncol=</span>p))</a>
+<a class="sourceLine" id="cb11-4" data-line-number="4">data2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">group=</span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>,<span class="dv">150</span>,<span class="dt">replace=</span><span class="ot">TRUE</span>),<span class="kw">matrix</span>(<span class="kw">rnorm</span>(p<span class="op">*</span><span class="dv">150</span>),<span class="dt">ncol=</span>p))</a>
+<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="kw">isInputValid</span>(<span class="kw">list</span>(data1,data2))</a></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">p&lt;-<span class="dv">100</span></a>
+<a class="sourceLine" id="cb13-3" data-line-number="3">data1 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">group=</span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dv">200</span>,<span class="dt">replace=</span><span class="ot">TRUE</span>),<span class="kw">matrix</span>(<span class="kw">rnorm</span>(p<span class="op">*</span><span class="dv">200</span>),<span class="dt">ncol=</span>p))</a>
+<a class="sourceLine" id="cb13-4" data-line-number="4">a&lt;-<span class="kw">list</span>(data1,data1,data1,data1,data1,data1)</a>
+<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="kw">isInputValid</span>(a)</a></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+</div>
+<div id="isnormbygroup" class="section level2">
+<h2>isNormByGroup</h2>
+<p>This non-exported function determines if a biomarker is normally distributed by group at alpha level 0.05. Note that the shapiro.test() function limits sample size to 5000.</p>
+<p>Usage: isNormByGroup(dataFrame, marker)</p>
+<p>Marker is the biomarker number to be tested; e.g., for the nth biomarker, input integer n. Note that marker n corresponds to column n+1 in the data frame.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">isNormByGroup</span>(data1,<span class="dv">3</span>)</a></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
+<a class="sourceLine" id="cb17-2" data-line-number="2">p&lt;-<span class="dv">100</span></a>
+<a class="sourceLine" id="cb17-3" data-line-number="3">data3 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">group=</span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dv">200</span>,<span class="dt">replace=</span><span class="ot">TRUE</span>),<span class="kw">matrix</span>(<span class="kw">rexp</span>(p<span class="op">*</span><span class="dv">200</span>),<span class="dt">ncol=</span>p))</a>
+<a class="sourceLine" id="cb17-4" data-line-number="4"><span class="kw">isNormByGroup</span>(data3,<span class="dv">4</span>)</a></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

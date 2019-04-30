@@ -1,0 +1,100 @@
+---
+title: "Group5Project"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Group5Project}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r, include = FALSE}
+#library(devtools)
+devtools::load_all()
+library(Group5Project)
+```
+
+This vignette summarises the main functions in our package.
+
+## pooledPValues
+This is the main function of the package: it is the only exported function, and as such the only function that the user should interface with. It pools the p-values between data frames using the specified method. 
+
+Usage: pooledPValues(method = "Fisher", ...)
+
+The possible pooling method arguments are:
+
+* "Fisher" for Fisher
+
+* "Stouffer" for Stouffer
+
+* "minP" for Minimum P-value
+
+* "maxP" for Maximum P-value
+
+The data frames to pool the p-values from are to be passed as arguments after the method specification argument. There must be between 2 and 5 data frames, all with the same number of columns, and at least 2 groups per data frame.
+
+The output is a vector of the pooled p-values for each biomarker. For p biomarkers, the vector will be of length p.
+
+```{r}
+set.seed(123)
+p<-100
+data1 <- data.frame(group=sample(1:3,200,replace=TRUE),matrix(rnorm(p*200),ncol=p))
+data2 <- data.frame(group=sample(1:2,150,replace=TRUE),matrix(rnorm(p*150),ncol=p))
+pooledPValues(method = "Fisher",data1,data2)
+```
+```{r}
+pooledPValues(method = "Stouffer",data1,data2)
+```
+```{r}
+pooledPValues(method = "minP",data1,data2)
+```
+```{r}
+pooledPValues(method = "maxP",data1,data2)
+```
+
+## getFramePvals
+This non-exported function tests for normality within groups as well as homoskedasticity between groups, then applies the appropriate test for group difference. The return value is a vector of the resulting p-values. 
+
+```{r}
+set.seed(123)
+p<-100
+data1 <- data.frame(group=sample(1:3,200,replace=TRUE),matrix(rnorm(p*200),ncol=p))
+getFramePvals(data1)
+```
+
+## isInputValid
+This non-exported function tests to see if the input to the main function is valid. Valid input is defined as 2-5 data frames, each with:
+
+* The same number of columns.
+
+* At least 2 unique values in the first column.
+
+```{r}
+set.seed(123)
+p<-100
+data1 <- data.frame(group=sample(1:3,200,replace=TRUE),matrix(rnorm(p*200),ncol=p))
+data2 <- data.frame(group=sample(1:2,150,replace=TRUE),matrix(rnorm(p*150),ncol=p))
+isInputValid(list(data1,data2))
+```
+```{r}
+set.seed(123)
+p<-100
+data1 <- data.frame(group=sample(1:3,200,replace=TRUE),matrix(rnorm(p*200),ncol=p))
+a<-list(data1,data1,data1,data1,data1,data1)
+isInputValid(a)
+```
+
+## isNormByGroup
+This non-exported function determines if a biomarker is normally distributed by group at alpha level 0.05. Note that the shapiro.test() function limits sample size to 5000.
+
+Usage: isNormByGroup(dataFrame, marker)
+
+Marker is the biomarker number to be tested; e.g., for the nth biomarker, input integer n. Note that marker n corresponds to column n+1 in the data frame.
+```{r}
+isNormByGroup(data1,3)
+```
+```{r}
+set.seed(123)
+p<-100
+data3 <- data.frame(group=sample(1:3,200,replace=TRUE),matrix(rexp(p*200),ncol=p))
+isNormByGroup(data3,4)
+```

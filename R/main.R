@@ -234,7 +234,7 @@ isInputValid = function(input){
   numCols = length(input[[1]][1,])
   for(i in 1:length(input)){
     # Check that the list element is a data frame
-    if(class(input[[i]] != "data.frame")){
+    if(class(input[[i]]) != "data.frame"){
       tbr = FALSE
       break
     }
