@@ -7,13 +7,17 @@
 #' @param ... The data frames to pool the p-values from.  Must be between 2 and 5 data frames, all with the same number of columns, and at least 2 groups per data frame.
 #' @return A vector containing pooled p-values for each biomarker.  For p biomarkers, the vector will be of length p.
 #' @export
-pooledPValues = function(method = "Fisher", ...){
+pooledPValues = function(method = c("Fisher", "Stouffer", "minP", "maxP"), ...){
+  # Check for method argument validity
+  if((method!="Stouffer")&&(method!="Fisher")&&(method!="minP")&&(method!="maxP")){
+    stop("Input is invalid: argument 'method' must be either 'Stouffer', 'Fisher', 'minP', or 'maxP'.")
+  }
   # Place the optional data frame arguments into a list
   frames = list(...)
   # Check the data frames for validity
   if(!isInputValid(frames)){
     # If invalid, thow an exception and stop execution
-    stop("Input is invalid: invalid data frames.  Please see documentation.")
+    stop("Input is invalid: invalid data frames.  Please see documentation (?pooledPValues) for valid data.frame input specifications.")
   }
   # Generate a list (by data frame) of vectors (by biomarker in data frame) of p-values for group difference in each biomarker.
   #     e.g., p-value for group difference in biomarker j from data frame i is given by unpooledPvalsList[[i]][j].

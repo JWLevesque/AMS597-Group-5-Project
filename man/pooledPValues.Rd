@@ -4,7 +4,7 @@
 \alias{pooledPValues}
 \title{Pools the p-values between data frames using the specified method.}
 \usage{
-pooledPValues(method = "Fisher", ...)
+pooledPValues(method = c("Fisher", "Stouffer", "minP", "maxP"), ...)
 }
 \arguments{
 \item{method}{The desired pooling method: "Fisher" for Fisher, "Stouffer" for Stouffer, "minP" for minimum p-value, or "maxP" for maximum p-value.}
